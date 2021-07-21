@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DexTask
 {
@@ -13,7 +9,7 @@ namespace DexTask
         public DateTime DateTime { get; private set; }
         public bool BoolFlag { get; private set; }
 
-        private static readonly Random _rand = new Random();
+        private static readonly Random Rand = new Random();
 
         public override string ToString()
         {
@@ -22,16 +18,12 @@ namespace DexTask
 
         public static CustomType GeneratingObjects()
         {
-            bool flag = false;
-            if (_rand.Next(0, 100) % 2 == 0)
-            {
-                flag = true;
-            }
+            var flag = Rand.Next(2) % 2 == 1;
             return new CustomType()
             {
                 Lines = Guid.NewGuid().ToString("n").Substring(0, 8),
-                Numbers = _rand.Next(100, 130),
-                DateTime = (new DateTime(1970, 1, 1, 0, 0, 0, 0)).AddSeconds(_rand.Next(1000000000, 1999999999)),
+                Numbers = Rand.Next(100, 130),
+                DateTime = new DateTime(1990, 1, 1, 0, 0, 0, 0).AddSeconds(Rand.Next(0, 1999999999)),
                 BoolFlag = flag
             };
         }

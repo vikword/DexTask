@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DexTask
 {
@@ -16,9 +13,9 @@ namespace DexTask
                 obj[i] = CustomType.GeneratingObjects();
             }
 
-            var WhereOrder = obj.Where(n => n.BoolFlag == true && n.Lines[0] == 'c')
+            var whereOrder = obj.Where(n => n.BoolFlag && n.Lines[0] == 'c')
                                 .OrderBy(u => u.Numbers);
-            foreach (var n in WhereOrder)
+            foreach (var n in whereOrder)
             {
                 Console.WriteLine(n);
             }
@@ -27,22 +24,28 @@ namespace DexTask
             foreach (var c in group)
             {
                 Console.WriteLine($"{c.Key} - количество: {c.Count()}\n");
+                foreach (var item in c)
+                {
+                    Console.WriteLine(item);
+                }
+                Console.WriteLine();
             }
 
-            var all = obj.All(s => s.Numbers > 99);
-            Console.WriteLine($"Все элементы коллекции obj.Numbers больше: 127 - {all}\n");
+            DateTime time = new DateTime(1970, 1, 1, 0, 0, 0);
+            var all = obj.All(s => s.DateTime > time);
+            Console.WriteLine($"Все элементы коллекции s.DateTame больше: {time} - {all}\n");
 
-            var any = obj.Any(u => u.Numbers > 140);
-            Console.WriteLine($"Есть элемент в коллекции obj.Numbers больше: 140 - {any}\n");
+            var any = obj.Any(u => u.Lines == "4f896b01");
+            Console.WriteLine($"Элемент в коллекции u.Lines равен: 4f896b01 - {any}\n");
 
             var sum = obj.Sum(s => s.Numbers);
-            Console.WriteLine($"Сумма чисел obj.Numbers {sum}\n");
+            Console.WriteLine($"Сумма чисел s.Numbers {sum}\n");
 
-            var min = obj.Min(s => s.Numbers);
-            Console.WriteLine($"Минимальное значение obj.Numbers {min}\n");
+            var min = obj.Min(s => s.BoolFlag);
+            Console.WriteLine($"Минимальное значение s.BoolFlag {min}\n");
 
-            var max = obj.Max(s => s.Numbers);
-            Console.WriteLine($"Максимальное значение obj.Numbers {max}\n");
+            var max = obj.Max(s => s.DateTime);
+            Console.WriteLine($"Максимальное значение s.DateTime {max}\n");
             Console.ReadKey();
         }
     }
